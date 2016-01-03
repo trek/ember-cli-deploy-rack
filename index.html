@@ -1,0 +1,176 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Ember-cli-deploy-rack by bitaculous</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Ember-cli-deploy-rack</h1>
+        <p>A Rack package to launch your Ember.js application into the Cloud.</p>
+
+        <p class="view"><a href="https://github.com/bitaculous/ember-cli-deploy-rack">View the Project on GitHub <small>bitaculous/ember-cli-deploy-rack</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/bitaculous/ember-cli-deploy-rack/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/bitaculous/ember-cli-deploy-rack/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/bitaculous/ember-cli-deploy-rack">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h2>
+<a id="summary" class="anchor" href="#summary" aria-hidden="true"><span class="octicon octicon-link"></span></a>Summary</h2>
+
+<p>Ember CLI Deploy Rack can be used to serve an <a href="http://www.ember-cli.com" title="The command line interface for ambitious web applications.">Ember CLI</a> application deployed with the help of <a href="http://ember-cli.github.io/ember-cli-deploy" title="Simple, flexible deployment for your Ember app">Ember CLI Deploy</a> and
+<a href="https://github.com/LevelbossMike/ember-deploy-redis" title="The Redis-adapter implementation to use Redis with Ember CLI Deploy.">ember-deploy-redis</a>.</p>
+
+<p>You can deploy your application to production, test it out by passing an <code>revision</code> parameter with the revision you want
+to test and activate when you feel confident that everything is working as expected.</p>
+
+<p>For further information see <a href="http://ember-cli.github.io/ember-cli-deploy" title="Simple, flexible deployment for your Ember app">Ember CLI Deploy</a>.</p>
+
+<h2>
+<a id="prerequisites" class="anchor" href="#prerequisites" aria-hidden="true"><span class="octicon octicon-link"></span></a>Prerequisites</h2>
+
+<ul>
+<li><a href="https://www.ruby-lang.org" title="A dynamic, open source programming language with a focus on simplicity and productivity.">Ruby</a></li>
+<li><a href="http://redis.io" title="An open source, BSD licensed, advanced key-value cache and store.">Redis</a></li>
+</ul>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<ol>
+<li>
+<p>Create a Gemfile</p>
+
+<div class="highlight highlight-source-ruby"><pre><span class="pl-c">#!/usr/bin/env bundle</span>
+
+source <span class="pl-s"><span class="pl-pds">'</span>https://rubygems.org<span class="pl-pds">'</span></span>
+
+<span class="pl-k">gem</span> <span class="pl-s"><span class="pl-pds">'</span>ember-cli-deploy-rack<span class="pl-pds">'</span></span>, <span class="pl-c1">github:</span> <span class="pl-s"><span class="pl-pds">'</span>bitaculous/ember-cli-deploy-rack<span class="pl-pds">'</span></span>, <span class="pl-c1">require:</span> <span class="pl-c1">false</span></pre></div>
+</li>
+<li><p>Run <code>bundle</code> to install all dependencies with <a href="http://bundler.io" title="The best way to manage a Ruby application's gems">Bundler</a></p></li>
+</ol>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<ol>
+<li>
+<p>Create a Rack configuration</p>
+
+<div class="highlight highlight-source-ruby"><pre><span class="pl-c">#!/usr/bin/env rackup</span>
+
+<span class="pl-c"># This file is used by Rack-based servers to start the application.</span>
+
+<span class="pl-k">require</span> <span class="pl-s"><span class="pl-pds">'</span>bundler/setup<span class="pl-pds">'</span></span>
+
+<span class="pl-k">require</span> <span class="pl-s"><span class="pl-pds">'</span>ember/cli/deploy/rack<span class="pl-pds">'</span></span>
+
+engine <span class="pl-k">=</span> <span class="pl-c1">Ember</span>::<span class="pl-c1">CLI</span>::<span class="pl-c1">Deploy</span>::<span class="pl-c1">Rack</span>::<span class="pl-c1">Engine</span>.<span class="pl-k">new</span>
+engine.settings.set <span class="pl-c1">:root</span>, <span class="pl-c1">Dir</span>.pwd
+
+run engine</pre></div>
+</li>
+<li><p>Run the engine with <code>rackup</code> or your favorite Ruby Webserver</p></li>
+</ol>
+
+<h2>
+<a id="configuration" class="anchor" href="#configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configuration</h2>
+
+<p>Ember CLI Deploy Rack can be configured in various ways:</p>
+
+<ol>
+<li>
+<p>Via settings</p>
+
+<div class="highlight highlight-source-ruby"><pre>engine <span class="pl-k">=</span> <span class="pl-c1">Ember</span>::<span class="pl-c1">CLI</span>::<span class="pl-c1">Deploy</span>::<span class="pl-c1">Rack</span>::<span class="pl-c1">Engine</span>.<span class="pl-k">new</span>
+engine.settings.set <span class="pl-c1">:root</span>, <span class="pl-c1">Dir</span>.pwd
+<span class="pl-c"># engine.settings.set :index_id, 'ember-cli-deploy-rack'</span>
+<span class="pl-c"># engine.settings.set :redis_client, proc { Redis.new redis_client_configuration }</span>
+<span class="pl-c"># engine.settings.set :redis_client_configuration, { host: '127.0.0.1', ... }</span>
+
+run engine</pre></div>
+</li>
+<li>
+<p>Via YAML configuration files</p>
+
+<p>Just create a configuration file <code>config/settings.yml</code> and adjust properly, for an example see
+<a href="https://github.com/bitaculous/ember-cli-deploy-rack/blob/master/resources/config/settings.yml" title="Sample YAML configuration">resources/config/settings.yml</a>. You can also create environment specific configurations under
+<code>config/settings/{ENVIRONMENT}.yml</code>.</p>
+</li>
+</ol>
+
+<h2>
+<a id="development" class="anchor" href="#development" aria-hidden="true"><span class="octicon octicon-link"></span></a>Development</h2>
+
+<h3>
+<a id="run-specs-with-rspec" class="anchor" href="#run-specs-with-rspec" aria-hidden="true"><span class="octicon octicon-link"></span></a>Run specs with <a href="http://rspec.info" title="Behaviour Driven Development for Ruby">RSpec</a>
+</h3>
+
+<p>Run <code>rspec</code>.</p>
+
+<p>or via <a href="http://guardgem.org" title="A command line tool to easily handle events on file system modifications.">Guard</a>:</p>
+
+<pre><code>$ guard -g spec
+</code></pre>
+
+<h3>
+<a id="see-test-coverage" class="anchor" href="#see-test-coverage" aria-hidden="true"><span class="octicon octicon-link"></span></a>See Test Coverage</h3>
+
+<p>Run <code>COVERAGE=true rspec</code>.</p>
+
+<h3>
+<a id="run-rubocop" class="anchor" href="#run-rubocop" aria-hidden="true"><span class="octicon octicon-link"></span></a>Run <a href="https://github.com/bbatsov/rubocop" title="A Ruby static code analyzer, based on the community Ruby style guide.">RuboCop</a>
+</h3>
+
+<p>Run <code>rubocop</code>.</p>
+
+<p>To run all specs and RuboCop altogether, run <code>rake</code>.</p>
+
+<h2>
+<a id="code-status" class="anchor" href="#code-status" aria-hidden="true"><span class="octicon octicon-link"></span></a>Code Status</h2>
+
+<p><a href="https://travis-ci.org/bitaculous/ember-cli-deploy-rack" title="Ember CLI Deploy Rack at Travis CI"><img src="https://img.shields.io/travis/bitaculous/ember-cli-deploy-rack.svg?style=flat" alt="Travis CI Status" title="Travis CI Status"></a>
+<a href="https://codeclimate.com/github/bitaculous/ember-cli-deploy-rack" title="Ember CLI Deploy Rack at Code Climate"><img src="https://img.shields.io/codeclimate/github/bitaculous/ember-cli-deploy-rack.svg?style=flat" alt="Code Climate Status" title="Code Climate Status"></a>
+<a href="https://codeclimate.com/github/bitaculous/ember-cli-deploy-rack" title="Test Coverage (Code Climate)"><img src="https://img.shields.io/codeclimate/coverage/github/bitaculous/ember-cli-deploy-rack.svg?style=flat" alt="Test Coverage Status" title="Test Coverage Status"></a>
+<a href="https://gemnasium.com/bitaculous/ember-cli-deploy-rack" title="Ember CLI Deploy Rack at Gemnasium"><img src="https://img.shields.io/gemnasium/bitaculous/ember-cli-deploy-rack.svg?style=flat" alt="Gemnasium Status" title="Gemnasium Status"></a></p>
+
+<h2>
+<a id="bug-reports" class="anchor" href="#bug-reports" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bug Reports</h2>
+
+<p>Github Issues are used for managing bug reports and feature requests. If you run into issues, please search the issues
+and submit new problems <a href="https://github.com/bitaculous/ember-cli-deploy-rack/issues" title="Github Issues">here</a>.</p>
+
+<h2>
+<a id="versioning" class="anchor" href="#versioning" aria-hidden="true"><span class="octicon octicon-link"></span></a>Versioning</h2>
+
+<p>This library aims to adhere to <a href="http://semver.org" title="Semantic Versioning 2.0.0">Semantic Versioning 2.0.0</a>. Violations of this scheme should be reported as bugs.
+Specifically, if a minor or patch version is released that breaks backward compatibility, that version should be
+immediately yanked and / or a new version should be immediately released that restores compatibility.</p>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>Ember CLI Deploy Rack is released under the <a href="http://opensource.org/licenses/MIT" title="The MIT License (MIT)">MIT License (MIT)</a>, see <a href="https://raw.githubusercontent.com/bitaculous/ember-cli-deploy-rack/master/LICENSE" title="License">LICENSE</a>.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/bitaculous">bitaculous</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
