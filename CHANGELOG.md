@@ -1,3 +1,8 @@
+1.0.1
+=====
+
+* [✓] Fixed version require
+
 1.0.0
 =====
 
