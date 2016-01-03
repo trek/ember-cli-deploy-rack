@@ -1,5 +1,5 @@
-require_relative 'rack/engine'
 require_relative 'rack/version'
+require_relative 'rack/engine'
 
 module Ember
   module CLI
