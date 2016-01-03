@@ -1,0 +1,10 @@
+# The index identifier for the index key used by Redis.
+index_id: 'ember-cli-deploy-rack'
+
+redis:
+  # For available options see `Redis::Client::DEFAULTS`.
+  # host: '<HOST>'
+  # port: '<PORT>'
+  # scheme: '<SCHEME>'
+  # password: '<PASSWORD>'
+  # path: '<PATH>'

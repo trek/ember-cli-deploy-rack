@@ -1,0 +1,3 @@
+--backtrace
+--color
+--require ember_cli_deploy_rack_helper

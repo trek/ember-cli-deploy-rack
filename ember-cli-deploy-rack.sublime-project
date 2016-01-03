@@ -1,0 +1,17 @@
+{
+  "folders": [
+    {
+      "name": "ember-cli-deploy-rack",
+      "path": "./",
+      "folder_exclude_patterns": [
+        ".bundle",
+        "coverage",
+        "pkg",
+        "tmp"
+      ],
+      "file_exclude_patterns": [
+        ".keep"
+      ]
+    }
+  ]
+}

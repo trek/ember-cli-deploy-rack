@@ -1,0 +1,11 @@
+/*.sublime-workspace
+/.bundle/
+/.ruby-gemset
+/.ruby-version
+/config/settings.yml
+/config/settings/
+/coverage/
+/Gemfile.lock
+/log/*.log
+/pkg/
+/tmp/
