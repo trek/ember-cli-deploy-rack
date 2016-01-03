@@ -12,7 +12,8 @@ Summary
 -------
 
 Ember CLI Deploy Rack can be used to serve an [Ember CLI] application deployed with the help of [Ember CLI Deploy] and
-[ember-deploy-redis].
+[ember-deploy-redis]. Basically, it is ready to use Sinatra application, which connects to Redis and returns the
+uploaded index.html.
 
 You can deploy your application to production, test it out by passing an `revision` parameter with the revision you want
 to test and activate when you feel confident that everything is working as expected.
@@ -132,7 +133,7 @@ Ember CLI Deploy Rack is released under the [MIT License (MIT)], see [LICENSE].
 [Ember CLI]: http://www.ember-cli.com "The command line interface for ambitious web applications."
 [Ember CLI Deploy Rack]: https://bitaculous.github.io/ember-cli-deploy-rack/ "A Rack package to launch your Ember.js application into the Cloud."
 [Ember CLI Deploy]: http://ember-cli.github.io/ember-cli-deploy "Simple, flexible deployment for your Ember app"
-[ember-deploy-redis]: https://github.com/LevelbossMike/ember-deploy-redis "The Redis-adapter implementation to use Redis with Ember CLI Deploy."
+[ember-deploy-redis]: https://github.com/ember-cli-deploy/ember-cli-deploy-redis "An ember-cli-deploy plugin to upload index.html to a Redis store."
 [Ember.js]: http://emberjs.com "A framework for creating ambitious web applications."
 [Foreman]: http://ddollar.github.io/foreman "Manage Procfile-based applications"
 [Gemnasium]: https://gemnasium.com/bitaculous/ember-cli-deploy-rack "Ember CLI Deploy Rack at Gemnasium"
