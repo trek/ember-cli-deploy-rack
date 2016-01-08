@@ -14,24 +14,30 @@ module Ember
         #
         # The engine class of `Ember::CLI::Deploy::Rack`, inherited from `Sinatra::Application`.
         class Engine < Sinatra::Application
+          # === Constants ===
+
+          KEY_PREFIX            = 'ember-cli-deploy-rack:index'
+          ACTIVE_CONTENT_SUFFIX = 'current-content'
+          REVISION_REGEXP       = /^[0-9a-f]{32}$/i
+
           # === Settings ===
 
           set :root, File.expand_path('../../../../../../', __FILE__)
 
           set :key_prefix, proc {
-            key_prefix = Settings.key_prefix ? Settings.key_prefix : 'ember-cli-deploy-rack:index'
+            key_prefix = Settings.key_prefix ? Settings.key_prefix : KEY_PREFIX
 
             key_prefix.downcase
           }
 
           set :active_content_suffix, proc {
-            active_content_suffix = Settings.active_content_suffix ? Settings.active_content_suffix : 'current-content'
+            active_content_suffix = Settings.active_content_suffix ? Settings.active_content_suffix : ACTIVE_CONTENT_SUFFIX
 
             active_content_suffix.downcase
           }
 
           set :revision_regexp, proc {
-            regexp = /^[0-9a-f]{32}$/i
+            regexp = REVISION_REGEXP
 
             if Settings.revision && Settings.revision.regexp
               regexp = Regexp.new Settings.revision.regexp, 1
