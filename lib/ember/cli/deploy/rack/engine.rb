@@ -114,7 +114,14 @@ module Ember
 
           def get_key(revision)
             key = "#{settings.key_prefix}:#{settings.active_content_suffix}"
-            key = "#{settings.key_prefix}:#{revision}" if revision && revision =~ settings.revision_regexp
+
+            if revision
+              if revision =~ settings.revision_regexp
+                key = "#{settings.key_prefix}:#{revision}"
+              else
+                halt 400
+              end
+            end
 
             key
           end

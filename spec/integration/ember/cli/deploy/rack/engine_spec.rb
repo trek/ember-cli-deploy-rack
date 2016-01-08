@@ -2,6 +2,14 @@ RSpec.describe Ember::CLI::Deploy::Rack::Engine do
   let(:key_prefix) { app.settings.key_prefix }
   let(:redis)      { app.settings.redis_client }
 
+  it 'response with 400 when revision is not valid' do
+    revision = 'invalid-revision'
+
+    get '/', revision: revision
+
+    expect(last_response.status).to eq 400
+  end
+
   context 'data available' do
     describe '/' do
       it 'returns the `current-content` revision as default' do
