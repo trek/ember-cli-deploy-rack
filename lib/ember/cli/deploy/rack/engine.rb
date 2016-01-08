@@ -14,18 +14,30 @@ module Ember
         #
         # The engine class of `Ember::CLI::Deploy::Rack`, inherited from `Sinatra::Application`.
         class Engine < Sinatra::Application
-          # === Constants ===
-
-          REVISION = /\A[0-9a-f]{7}\z/i
-
           # === Settings ===
 
           set :root, File.expand_path('../../../../../../', __FILE__)
 
-          set :index_id, proc {
-            index_id = Settings.index_id ? Settings.index_id : 'ember-cli-deploy-rack'
+          set :key_prefix, proc {
+            key_prefix = Settings.key_prefix ? Settings.key_prefix : 'ember-cli-deploy-rack:index'
 
-            index_id.downcase
+            key_prefix.downcase
+          }
+
+          set :active_content_suffix, proc {
+            active_content_suffix = Settings.active_content_suffix ? Settings.active_content_suffix : 'current-content'
+
+            active_content_suffix.downcase
+          }
+
+          set :revision_regexp, proc {
+            regexp = /^[0-9a-f]{32}$/i
+
+            if Settings.revision && Settings.revision.regexp
+              regexp = Regexp.new Settings.revision.regexp, 1
+            end
+
+            regexp
           }
 
           set :redis_client, proc {
@@ -85,17 +97,20 @@ module Ember
           protected
 
           def index(revision)
-            if revision && revision =~ REVISION
-              index_key = "#{settings.index_id}:#{revision}"
-            else
-              index_key = "#{settings.index_id}:current"
-            end
+            key = get_key revision
 
-            logger.debug "Getting content from Redis with index key: `#{index_key}`..."
+            logger.debug "Getting content from Redis with key: `#{key}`..."
 
             redis = settings.redis_client
 
-            redis.get(index_key) || halt(404)
+            redis.get(key) || halt(404)
+          end
+
+          def get_key(revision)
+            key = "#{settings.key_prefix}:#{settings.active_content_suffix}"
+            key = "#{settings.key_prefix}:#{revision}" if revision && revision =~ settings.revision_regexp
+
+            key
           end
         end
       end

@@ -75,9 +75,10 @@ Ember CLI Deploy Rack can be configured in various ways:
     ```ruby
     engine = Ember::CLI::Deploy::Rack::Engine.new
     engine.settings.set :root, Dir.pwd
-    # engine.settings.set :index_id, 'ember-cli-deploy-rack'
+    # engine.settings.set :key_prefix, 'ember-cli-deploy-rack:index'
     # engine.settings.set :redis_client, proc { Redis.new redis_client_configuration }
     # engine.settings.set :redis_client_configuration, { host: '127.0.0.1', ... }
+    # ...
 
     run engine
     ```
