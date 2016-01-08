@@ -1,3 +1,8 @@
+2.0.1
+=====
+
+* [➠] Response with 400 when revision is not valid
+
 2.0.0
 =====
 
