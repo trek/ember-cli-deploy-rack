@@ -111,6 +111,20 @@ Run `rubocop`.
 
 To run all specs and RuboCop altogether, run `rake`.
 
+### Rack
+
+#### Start server
+
+```
+$ thin -R config.ru -d start
+```
+
+#### Stop server
+
+```
+$ thin stop
+```
+
 Bug Reports
 -----------
 
