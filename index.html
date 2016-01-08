@@ -32,8 +32,7 @@
 <a id="summary" class="anchor" href="#summary" aria-hidden="true"><span class="octicon octicon-link"></span></a>Summary</h2>
 
 <p>Ember CLI Deploy Rack can be used to serve an <a href="http://www.ember-cli.com" title="The command line interface for ambitious web applications.">Ember CLI</a> application deployed with the help of <a href="http://ember-cli.github.io/ember-cli-deploy" title="Simple, flexible deployment for your Ember app">Ember CLI Deploy</a> and
-<a href="https://github.com/ember-cli-deploy/ember-cli-deploy-redis" title="An ember-cli-deploy plugin to upload index.html to a Redis store.">ember-deploy-redis</a>. Basically, it is ready to use Sinatra application, which connects to Redis and returns the
-uploaded index.html.</p>
+<a href="https://github.com/ember-cli-deploy/ember-cli-deploy-redis" title="An ember-cli-deploy plugin to upload index.html to a Redis store.">ember-deploy-redis</a>.</p>
 
 <p>Basically, it is a <a href="http://www.sinatrarb.com" title="A DSL for quickly creating web applications in Ruby with minimal effort.">Sinatra</a> application, which connects to Redis and returns the uploaded index.html.</p>
 
@@ -100,9 +99,10 @@ run engine</pre></div>
 
 <div class="highlight highlight-source-ruby"><pre>engine <span class="pl-k">=</span> <span class="pl-c1">Ember</span>::<span class="pl-c1">CLI</span>::<span class="pl-c1">Deploy</span>::<span class="pl-c1">Rack</span>::<span class="pl-c1">Engine</span>.<span class="pl-k">new</span>
 engine.settings.set <span class="pl-c1">:root</span>, <span class="pl-c1">Dir</span>.pwd
-<span class="pl-c"># engine.settings.set :index_id, 'ember-cli-deploy-rack'</span>
+<span class="pl-c"># engine.settings.set :key_prefix, 'ember-cli-deploy-rack:index'</span>
 <span class="pl-c"># engine.settings.set :redis_client, proc { Redis.new redis_client_configuration }</span>
 <span class="pl-c"># engine.settings.set :redis_client_configuration, { host: '127.0.0.1', ... }</span>
+<span class="pl-c"># ...</span>
 
 run engine</pre></div>
 </li>
@@ -141,6 +141,21 @@ run engine</pre></div>
 <p>Run <code>rubocop</code>.</p>
 
 <p>To run all specs and RuboCop altogether, run <code>rake</code>.</p>
+
+<h3>
+<a id="rack" class="anchor" href="#rack" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rack</h3>
+
+<h4>
+<a id="start-server" class="anchor" href="#start-server" aria-hidden="true"><span class="octicon octicon-link"></span></a>Start server</h4>
+
+<pre><code>$ thin -R config.ru -d start
+</code></pre>
+
+<h4>
+<a id="stop-server" class="anchor" href="#stop-server" aria-hidden="true"><span class="octicon octicon-link"></span></a>Stop server</h4>
+
+<pre><code>$ thin stop
+</code></pre>
 
 <h2>
 <a id="code-status" class="anchor" href="#code-status" aria-hidden="true"><span class="octicon octicon-link"></span></a>Code Status</h2>
