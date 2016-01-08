@@ -1,3 +1,10 @@
+2.0.0
+=====
+
+* [➠] Renamed `index_id` to  `key_prefix`
+* [➠] Added `active_content_suffix` and `revision` options
+* [➠] Compatibility with the latest version of `ember-cli-deploy-redis`
+
 1.0.1
 =====
 

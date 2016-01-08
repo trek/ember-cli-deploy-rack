@@ -12,8 +12,7 @@ Summary
 -------
 
 Ember CLI Deploy Rack can be used to serve an [Ember CLI] application deployed with the help of [Ember CLI Deploy] and
-[ember-deploy-redis]. Basically, it is ready to use Sinatra application, which connects to Redis and returns the
-uploaded index.html.
+[ember-deploy-redis].
 
 Basically, it is a [Sinatra] application, which connects to Redis and returns the uploaded index.html.
 
