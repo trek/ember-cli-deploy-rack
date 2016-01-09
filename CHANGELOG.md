@@ -1,5 +1,5 @@
-Unreleased
-==========
+2.1.0
+=====
 
 * [➠] Updated README
 * [➠] Refactored engine code
