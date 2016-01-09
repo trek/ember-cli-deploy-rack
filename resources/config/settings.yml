@@ -17,3 +17,6 @@ revision:
 redis:
   # For available options see `Redis::Client::DEFAULTS`.
   url: 'redis://<PASSWORD>@<HOST>:<PORT>/<DATABASE>'
+
+# If enabled, debug information can be viewed under `/debug`. By default this option will be `false`.
+debug: false

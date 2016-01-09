@@ -1,3 +1,9 @@
+Unreleased
+==========
+
+* [➠] Debug information can be enabled / disabled
+* [➠] Formatted debug information
+
 2.1.0
 =====
 

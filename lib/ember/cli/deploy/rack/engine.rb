@@ -54,6 +54,8 @@ module Ember
             Redis.new settings.redis
           }
 
+          set :debug, false
+
           set :version, Ember::CLI::Deploy::Rack::VERSION
 
           # === Extensions ===
@@ -90,10 +92,14 @@ module Ember
           end
 
           get '/debug' do
-            @id    = 'debug'
-            @title = 'Debug'
+            if settings.debug
+              @id    = 'debug'
+              @title = 'Debug'
 
-            haml :debug
+              haml :debug
+            else
+              halt 403
+            end
           end
 
           # === Private ===

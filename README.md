@@ -79,6 +79,7 @@ Ember CLI Deploy Rack can be configured in various ways:
     # engine.settings.set :revision, { regexp: '^[0-9a-f]{32}$' }
     # engine.settings.set :redis, { host: '127.0.0.1', ... }
     # engine.settings.set :redis_client, proc { Redis.new settings.redis }
+    # engine.settings.set :debug, false
     # ...
 
     run engine
@@ -116,6 +117,10 @@ The regular expression to check the revision. By default this option will be `^[
 #### Redis
 
 The options for the Redis client. For available options see [Redis::Client::DEFAULTS].
+
+#### Debug
+
+If enabled, debug information can be viewed under `/debug`. By default this option will be `false`.
 
 Development
 -----------
