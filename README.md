@@ -85,10 +85,12 @@ Ember CLI Deploy Rack can be configured in various ways:
     run engine
     ```
 
-2. Via YAML configuration files
+2. Via YAML configuration file
 
     Just create a configuration file `config/settings.yml` and adjust properly, for an example see
     [resources/config/settings.yml].
+
+    **Note: You must set the `root` setting, so that the configuration can be found.**
 
 ### Options
 
