@@ -100,8 +100,10 @@ run engine</pre></div>
 <div class="highlight highlight-source-ruby"><pre>engine <span class="pl-k">=</span> <span class="pl-c1">Ember</span>::<span class="pl-c1">CLI</span>::<span class="pl-c1">Deploy</span>::<span class="pl-c1">Rack</span>::<span class="pl-c1">Engine</span>.<span class="pl-k">new</span>
 engine.settings.set <span class="pl-c1">:root</span>, <span class="pl-c1">Dir</span>.pwd
 <span class="pl-c"># engine.settings.set :key_prefix, 'ember-cli-deploy-rack:index'</span>
-<span class="pl-c"># engine.settings.set :redis_client, proc { Redis.new redis_client_configuration }</span>
-<span class="pl-c"># engine.settings.set :redis_client_configuration, { host: '127.0.0.1', ... }</span>
+<span class="pl-c"># engine.settings.set :active_content_suffix, 'current-content'</span>
+<span class="pl-c"># engine.settings.set :revision, { regexp: '^[0-9a-f]{32}$' }</span>
+<span class="pl-c"># engine.settings.set :redis, { host: '127.0.0.1', ... }</span>
+<span class="pl-c"># engine.settings.set :redis_client, proc { Redis.new settings.redis }</span>
 <span class="pl-c"># ...</span>
 
 run engine</pre></div>
@@ -110,10 +112,43 @@ run engine</pre></div>
 <p>Via YAML configuration files</p>
 
 <p>Just create a configuration file <code>config/settings.yml</code> and adjust properly, for an example see
-<a href="https://github.com/bitaculous/ember-cli-deploy-rack/blob/master/resources/config/settings.yml" title="Sample YAML configuration">resources/config/settings.yml</a>. You can also create environment specific configurations under
-<code>config/settings/{ENVIRONMENT}.yml</code>.</p>
+<a href="https://github.com/bitaculous/ember-cli-deploy-rack/blob/master/resources/config/settings.yml" title="Sample YAML configuration">resources/config/settings.yml</a>.</p>
 </li>
 </ol>
+
+<h3>
+<a id="options" class="anchor" href="#options" aria-hidden="true"><span class="octicon octicon-link"></span></a>Options</h3>
+
+<h4>
+<a id="key-prefix" class="anchor" href="#key-prefix" aria-hidden="true"><span class="octicon octicon-link"></span></a>Key Prefix</h4>
+
+<p>The prefix to be used for the Redis key under which file will be uploaded to Redis. The Redis key will be a combination
+of the <code>key_prefix</code> and the <code>revision_key</code>. Typically this is the <code>project.name</code> property from the deployment context
+and <code>:index</code> at the end. By default this option will be <code>ember-cli-deploy-rack:index</code>.</p>
+
+<p>For more details, see <a href="https://github.com/ember-cli-deploy/ember-cli-deploy-redis#keyprefix">https://github.com/ember-cli-deploy/ember-cli-deploy-redis#keyprefix</a>.</p>
+
+<h4>
+<a id="active-content-suffix" class="anchor" href="#active-content-suffix" aria-hidden="true"><span class="octicon octicon-link"></span></a>Active Content Suffix</h4>
+
+<p>The suffix to be used for the Redis key under which the activated revision content will be stored in Redis. By default
+this option will be <code>current-content</code>. This makes the default activated revision in Redis looks like: The <code>project.name</code>
+property from the deployment and <code>:index:current-content</code> at the end.</p>
+
+<p>For more details, see <a href="https://github.com/ember-cli-deploy/ember-cli-deploy-redis#activecontentsuffix">https://github.com/ember-cli-deploy/ember-cli-deploy-redis#activecontentsuffix</a>.</p>
+
+<h4>
+<a id="revision" class="anchor" href="#revision" aria-hidden="true"><span class="octicon octicon-link"></span></a>Revision</h4>
+
+<h4>
+<a id="regexp" class="anchor" href="#regexp" aria-hidden="true"><span class="octicon octicon-link"></span></a>Regexp</h4>
+
+<p>The regular expression to check the revision. By default this option will be <code>^[0-9a-f]{32}$</code>.</p>
+
+<h4>
+<a id="redis" class="anchor" href="#redis" aria-hidden="true"><span class="octicon octicon-link"></span></a>Redis</h4>
+
+<p>The options for the Redis client. For available options see <a href="https://github.com/redis/redis-rb/blob/master/lib/redis/client.rb#L8" title="The redis-rb defaults">Redis::Client::DEFAULTS</a>.</p>
 
 <h2>
 <a id="development" class="anchor" href="#development" aria-hidden="true"><span class="octicon octicon-link"></span></a>Development</h2>
@@ -145,16 +180,14 @@ run engine</pre></div>
 <h3>
 <a id="rack" class="anchor" href="#rack" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rack</h3>
 
-<h4>
-<a id="start-server" class="anchor" href="#start-server" aria-hidden="true"><span class="octicon octicon-link"></span></a>Start server</h4>
-
-<pre><code>$ thin -R config.ru -d start
+<pre><code>$ rackup
 </code></pre>
 
 <h4>
-<a id="stop-server" class="anchor" href="#stop-server" aria-hidden="true"><span class="octicon octicon-link"></span></a>Stop server</h4>
+<a id="thin" class="anchor" href="#thin" aria-hidden="true"><span class="octicon octicon-link"></span></a>Thin</h4>
 
-<pre><code>$ thin stop
+<pre><code>$ thin -R config.ru -d start
+$ thin stop
 </code></pre>
 
 <h2>
