@@ -22,7 +22,7 @@ module Ember
 
           KEY_PREFIX            = 'ember-cli-deploy-rack:index'
           ACTIVE_CONTENT_SUFFIX = 'current-content'
-          REVISION_REGEXP       = '^[0-9a-f]{323}$'
+          REVISION_REGEXP       = '^[0-9a-f]{32}$'
 
           # === Extensions ===
 
