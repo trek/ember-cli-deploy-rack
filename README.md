@@ -75,8 +75,10 @@ Ember CLI Deploy Rack can be configured in various ways:
     engine = Ember::CLI::Deploy::Rack::Engine.new
     engine.settings.set :root, Dir.pwd
     # engine.settings.set :key_prefix, 'ember-cli-deploy-rack:index'
-    # engine.settings.set :redis_client, proc { Redis.new redis_client_configuration }
-    # engine.settings.set :redis_client_configuration, { host: '127.0.0.1', ... }
+    # engine.settings.set :active_content_suffix, 'current-content'
+    # engine.settings.set :revision, { regexp: '^[0-9a-f]{32}$' }
+    # engine.settings.set :redis, { host: '127.0.0.1', ... }
+    # engine.settings.set :redis_client, proc { Redis.new settings.redis }
     # ...
 
     run engine
@@ -85,8 +87,35 @@ Ember CLI Deploy Rack can be configured in various ways:
 2. Via YAML configuration files
 
     Just create a configuration file `config/settings.yml` and adjust properly, for an example see
-    [resources/config/settings.yml]. You can also create environment specific configurations under
-    `config/settings/{ENVIRONMENT}.yml`.
+    [resources/config/settings.yml].
+
+### Options
+
+#### Key Prefix
+
+The prefix to be used for the Redis key under which file will be uploaded to Redis. The Redis key will be a combination
+of the `key_prefix` and the `revision_key`. Typically this is the `project.name` property from the deployment context
+and `:index` at the end. By default this option will be `ember-cli-deploy-rack:index`.
+
+For more details, see https://github.com/ember-cli-deploy/ember-cli-deploy-redis#keyprefix.
+
+#### Active Content Suffix
+
+The suffix to be used for the Redis key under which the activated revision content will be stored in Redis. By default
+this option will be `current-content`. This makes the default activated revision in Redis looks like: The `project.name`
+property from the deployment and `:index:current-content` at the end.
+
+For more details, see https://github.com/ember-cli-deploy/ember-cli-deploy-redis#activecontentsuffix.
+
+#### Revision
+
+#### Regexp
+
+The regular expression the check the revision. By default this option will be `^[0-9a-f]{32}$`.
+
+#### Redis
+
+The options for the Redis client. For available options see [Redis::Client::DEFAULTS].
 
 Development
 -----------
@@ -113,15 +142,14 @@ To run all specs and RuboCop altogether, run `rake`.
 
 ### Rack
 
-#### Start server
+```
+$ rackup
+```
+
+#### Thin
 
 ```
 $ thin -R config.ru -d start
-```
-
-#### Stop server
-
-```
 $ thin stop
 ```
 
@@ -160,6 +188,7 @@ Ember CLI Deploy Rack is released under the [MIT License (MIT)], see [LICENSE].
 [MIT License (MIT)]: http://opensource.org/licenses/MIT "The MIT License (MIT)"
 [Rack]: http://rack.github.io "A Ruby Webserver Interface"
 [Redis]: http://redis.io "An open source, BSD licensed, advanced key-value cache and store."
+[Redis::Client::DEFAULTS]: https://github.com/redis/redis-rb/blob/master/lib/redis/client.rb#L8 "The redis-rb defaults"
 [resources/config/settings.yml]: https://github.com/bitaculous/ember-cli-deploy-rack/blob/master/resources/config/settings.yml "Sample YAML configuration"
 [RSpec]: http://rspec.info "Behaviour Driven Development for Ruby"
 [RuboCop]: https://github.com/bbatsov/rubocop "A Ruby static code analyzer, based on the community Ruby style guide."

@@ -1,3 +1,11 @@
+Unreleased
+==========
+
+* [➠] Updated README
+* [➠] Refactored engine code
+* [✚] Added `debug` route
+* [✖] Removed `config` gem, `sinatra/config_file` is perfectly adequate
+
 2.0.1
 =====
 
