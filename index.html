@@ -104,6 +104,7 @@ engine.settings.set <span class="pl-c1">:root</span>, <span class="pl-c1">Dir</s
 <span class="pl-c"># engine.settings.set :revision, { regexp: '^[0-9a-f]{32}$' }</span>
 <span class="pl-c"># engine.settings.set :redis, { host: '127.0.0.1', ... }</span>
 <span class="pl-c"># engine.settings.set :redis_client, proc { Redis.new settings.redis }</span>
+<span class="pl-c"># engine.settings.set :debug, false</span>
 <span class="pl-c"># ...</span>
 
 run engine</pre></div>
@@ -149,6 +150,11 @@ property from the deployment and <code>:index:current-content</code> at the end.
 <a id="redis" class="anchor" href="#redis" aria-hidden="true"><span class="octicon octicon-link"></span></a>Redis</h4>
 
 <p>The options for the Redis client. For available options see <a href="https://github.com/redis/redis-rb/blob/master/lib/redis/client.rb#L8" title="The redis-rb defaults">Redis::Client::DEFAULTS</a>.</p>
+
+<h4>
+<a id="debug" class="anchor" href="#debug" aria-hidden="true"><span class="octicon octicon-link"></span></a>Debug</h4>
+
+<p>If enabled, debug information can be viewed under <code>/debug</code>. By default this option will be <code>false</code>.</p>
 
 <h2>
 <a id="development" class="anchor" href="#development" aria-hidden="true"><span class="octicon octicon-link"></span></a>Development</h2>
