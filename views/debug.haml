@@ -1,8 +1,18 @@
 %h1 Debug
 
 %p Root: #{settings.root}
+
 %p Key Prefix: #{settings.key_prefix}
+
 %p Active Content Suffix: #{settings.active_content_suffix}
+
 %p Revision Regexp: #{settings.revision['regexp']}
-%p Redis: #{settings.redis}
+
+%p
+  Redis Configuration:
+
+  %ul
+    - settings.redis.each do |element|
+      %li #{element[0].upcase}: #{element[1]}
+
 %p Version: #{settings.version}
