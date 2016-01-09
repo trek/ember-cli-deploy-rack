@@ -15,10 +15,9 @@ module Ember
         class Engine < Sinatra::Application
           # === Constants ===
 
-          ROOT         = File.expand_path '../../../../../../', __FILE__
-          VIEWS        = File.expand_path 'views', ROOT
-          ENVIRONMENTS = %w(development test staging production)
-          CONFIG       = 'config/settings.yml'
+          ROOT                  = File.expand_path '../../../../../../', __FILE__
+          VIEWS                 = File.expand_path 'views', ROOT
+          CONFIG                = 'config/settings.yml'
 
           KEY_PREFIX            = 'ember-cli-deploy-rack:index'
           ACTIVE_CONTENT_SUFFIX = 'current-content'
@@ -33,8 +32,6 @@ module Ember
           set :root, ROOT
 
           set :views, VIEWS
-
-          set :environments, ENVIRONMENTS
 
           set :key_prefix, KEY_PREFIX
 
