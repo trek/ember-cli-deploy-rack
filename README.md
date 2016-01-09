@@ -111,7 +111,7 @@ For more details, see https://github.com/ember-cli-deploy/ember-cli-deploy-redis
 
 #### Regexp
 
-The regular expression the check the revision. By default this option will be `^[0-9a-f]{32}$`.
+The regular expression to check the revision. By default this option will be `^[0-9a-f]{32}$`.
 
 #### Redis
 

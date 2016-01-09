@@ -11,7 +11,7 @@ key_prefix: 'ember-cli-deploy-rack:index'
 active_content_suffix: 'current-content'
 
 revision:
-  # The regular expression the check the revision. By default this option will be `^[0-9a-f]{32}$`.
+  # The regular expression to check the revision. By default this option will be `^[0-9a-f]{32}$`.
   regexp: '^[0-9a-f]{32}$'
 
 redis:
