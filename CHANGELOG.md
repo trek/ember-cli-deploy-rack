@@ -1,5 +1,5 @@
-Unreleased
-==========
+2.2.0
+=====
 
 * [➠] Debug information can be enabled / disabled
 * [➠] Formatted debug information
