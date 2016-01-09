@@ -1,8 +1,7 @@
-require 'config'
-require 'config/integration/sinatra'
 require 'logger'
 require 'redis'
 require 'sinatra/base'
+require 'sinatra/config_file'
 require 'sinatra/custom_logger'
 require 'sinatra/reloader'
 
@@ -16,41 +15,34 @@ module Ember
         class Engine < Sinatra::Application
           # === Constants ===
 
+          ROOT         = File.expand_path '../../../../../../', __FILE__
+          VIEWS        = File.expand_path 'views', ROOT
+          ENVIRONMENTS = %w(development test staging production)
+          CONFIG       = 'config/settings.yml'
+
           KEY_PREFIX            = 'ember-cli-deploy-rack:index'
           ACTIVE_CONTENT_SUFFIX = 'current-content'
-          REVISION_REGEXP       = /^[0-9a-f]{32}$/i
+          REVISION_REGEXP       = '^[0-9a-f]{323}$'
+
+          # === Extensions ===
+
+          register Sinatra::ConfigFile
 
           # === Settings ===
 
-          set :root, File.expand_path('../../../../../../', __FILE__)
+          set :root, ROOT
 
-          set :key_prefix, proc {
-            key_prefix = Settings.key_prefix ? Settings.key_prefix : KEY_PREFIX
+          set :views, VIEWS
 
-            key_prefix.downcase
-          }
+          set :environments, ENVIRONMENTS
 
-          set :active_content_suffix, proc {
-            active_content_suffix = Settings.active_content_suffix ? Settings.active_content_suffix : ACTIVE_CONTENT_SUFFIX
+          set :key_prefix, KEY_PREFIX
 
-            active_content_suffix.downcase
-          }
+          set :active_content_suffix, ACTIVE_CONTENT_SUFFIX
 
-          set :revision_regexp, proc {
-            regexp = REVISION_REGEXP
+          set :revision, 'regexp' => REVISION_REGEXP
 
-            if Settings.revision && Settings.revision.regexp
-              regexp = Regexp.new Settings.revision.regexp, 1
-            end
-
-            regexp
-          }
-
-          set :redis_client, proc {
-            Redis.new redis_client_configuration
-          }
-
-          set :redis_client_configuration, proc {
+          set :redis, proc {
             defaults = Redis::Client::DEFAULTS.dup
 
             defaults.keys.each do |key|
@@ -58,16 +50,18 @@ module Ember
               defaults[key] = defaults[key].call if defaults[key].respond_to? :call
             end
 
-            settings = Settings.redis ? Settings.redis.to_h : {}
+            defaults
+          }
 
-            defaults.merge settings
+          set :redis_client, proc {
+            Redis.new settings.redis
           }
 
           set :version, Ember::CLI::Deploy::Rack::VERSION
 
           # === Extensions ===
 
-          register Config
+          config_file File.expand_path CONFIG
 
           # === Helpers ===
 
@@ -76,7 +70,7 @@ module Ember
           # === Configuration ===
 
           configure do
-            logfile = File.open "#{root}/log/#{environment}.log", 'a'
+            logfile = File.open "#{settings.root}/log/#{environment}.log", 'a'
             logger  = Logger.new logfile
 
             logger.level = Logger::DEBUG if development?
@@ -98,6 +92,13 @@ module Ember
             index params[:revision]
           end
 
+          get '/debug' do
+            @id    = 'debug'
+            @title = 'Debug'
+
+            haml :debug
+          end
+
           # === Private ===
 
           protected
@@ -107,16 +108,18 @@ module Ember
 
             logger.debug "Getting content from Redis with key: `#{key}`..."
 
-            redis = settings.redis_client
+            redis_client = settings.redis_client
 
-            redis.get(key) || halt(404)
+            redis_client.get(key) || halt(404)
           end
 
           def get_key(revision)
             key = "#{settings.key_prefix}:#{settings.active_content_suffix}"
 
             if revision
-              if revision =~ settings.revision_regexp
+              regexp = Regexp.new settings.revision['regexp'], 1
+
+              if revision =~ regexp
                 key = "#{settings.key_prefix}:#{revision}"
               else
                 halt 400

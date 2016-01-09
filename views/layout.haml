@@ -1,0 +1,28 @@
+!!!
+%html
+  %head
+    %title= @title
+
+    %meta{ charset: 'utf-8' }/
+
+    %meta{ 'http-equiv' => 'X-UA-Compatible', content: 'IE=edge' }/
+
+    %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1' }/
+
+    :css
+      html {
+        font-family: sans-serif;
+        -ms-text-size-adjust: 100%;
+        -webkit-text-size-adjust: 100%;
+      }
+
+      body {
+        margin: 0;
+        background: #000;
+        color: #FFF;
+      }
+
+      .canvas { margin: 1em }
+
+  %body.canvas{ id: @id }
+    = yield

@@ -1,6 +1,6 @@
 #!/usr/bin/env gem build
 
-require File.expand_path '../lib/ember/cli/deploy/rack/version', __FILE__
+require_relative 'lib/ember/cli/deploy/rack/version'
 
 Gem::Specification.new 'ember-cli-deploy-rack', Ember::CLI::Deploy::Rack::VERSION do |spec|
   spec.summary          = 'A Rack package to launch your Ember.js application into the Cloud.'
@@ -16,7 +16,7 @@ Gem::Specification.new 'ember-cli-deploy-rack', Ember::CLI::Deploy::Rack::VERSIO
 
   spec.add_runtime_dependency 'sinatra',         '~> 1.4.6'
   spec.add_runtime_dependency 'sinatra-contrib', '~> 1.4.6'
-  spec.add_runtime_dependency 'config',          '~> 1.0.0'
+  spec.add_runtime_dependency 'haml',            '~> 4.0.7'
   spec.add_runtime_dependency 'redis',           '~> 3.2.2'
 
   spec.add_development_dependency 'bundler', '~> 1.10'

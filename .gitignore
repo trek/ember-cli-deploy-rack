@@ -2,8 +2,7 @@
 /.bundle/
 /.ruby-gemset
 /.ruby-version
-/config/settings*.yml
-/config/settings/
+/config/settings.yml
 /coverage/
 /Gemfile.lock
 /log/*.log
