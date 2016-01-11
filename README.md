@@ -56,10 +56,7 @@ Usage
 
     require 'ember/cli/deploy/rack'
 
-    engine = Ember::CLI::Deploy::Rack::Engine.new
-    engine.settings.set :root, Dir.pwd
-
-    run engine
+    run Ember::CLI::Deploy::Rack::Engine
     ```
 
 2. Run the engine with `rackup` or your favorite Ruby Webserver
@@ -73,7 +70,10 @@ Ember CLI Deploy Rack can be configured in various ways:
 
     ```ruby
     engine = Ember::CLI::Deploy::Rack::Engine.new
-    engine.settings.set :root, Dir.pwd
+
+    # === Settings ====
+
+    # engine.settings.set :root, Dir.pwd
     # engine.settings.set :key_prefix, 'ember-cli-deploy-rack:index'
     # engine.settings.set :active_content_suffix, 'current-content'
     # engine.settings.set :revision, { regexp: '^[0-9a-f]{32}$' }
@@ -82,6 +82,19 @@ Ember CLI Deploy Rack can be configured in various ways:
     # engine.settings.set :debug, false
     # ...
 
+    # === Logging ====
+
+    # log_dir = File.expand_path 'log'
+    #
+    # if File.directory? log_dir
+    #   log_file = File.expand_path "#{engine.settings.environment}.log", log_dir
+    #
+    #   logger = Logger.new log_file, File::WRONLY | File::APPEND | File::CREAT
+    #   logger.level = Logger::ERROR
+    #
+    #   engine.settings.set :logger, logger
+    # end
+
     run engine
     ```
 
@@ -89,8 +102,6 @@ Ember CLI Deploy Rack can be configured in various ways:
 
     Just create a configuration file `config/settings.yml` and adjust properly, for an example see
     [resources/config/settings.yml].
-
-    **Note: You must set the `root` setting, so that the configuration file can be found.**
 
 ### Options
 
