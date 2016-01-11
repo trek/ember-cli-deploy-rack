@@ -1,5 +1,12 @@
-2.2.0
+2.3.0
 =====
+
+* [✖] Removed logging out of engine, should be configured via `config.ru`
+* [✓] Use `Sinatra::Base` instead of `Sinatra::Application`
+* [➠] Improved `debug` view
+
+2.2.0 (Yanked)
+==============
 
 * [➠] First release on RubyGems
 * [➠] Debug information can be enabled / disabled
