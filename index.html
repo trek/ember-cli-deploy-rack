@@ -60,7 +60,7 @@ to test and activate when you feel confident that everything is working as expec
 
 source <span class="pl-s"><span class="pl-pds">'</span>https://rubygems.org<span class="pl-pds">'</span></span>
 
-<span class="pl-k">gem</span> <span class="pl-s"><span class="pl-pds">'</span>ember-cli-deploy-rack<span class="pl-pds">'</span></span>, <span class="pl-c1">github:</span> <span class="pl-s"><span class="pl-pds">'</span>bitaculous/ember-cli-deploy-rack<span class="pl-pds">'</span></span>, <span class="pl-c1">require:</span> <span class="pl-c1">false</span></pre></div>
+<span class="pl-k">gem</span> <span class="pl-s"><span class="pl-pds">'</span>ember-cli-deploy-rack<span class="pl-pds">'</span></span>, <span class="pl-c1">require:</span> <span class="pl-c1">false</span></pre></div>
 </li>
 <li><p>Run <code>bundle</code> to install all dependencies with <a href="http://bundler.io" title="The best way to manage a Ruby application's gems">Bundler</a></p></li>
 </ol>
@@ -80,10 +80,7 @@ source <span class="pl-s"><span class="pl-pds">'</span>https://rubygems.org<span
 
 <span class="pl-k">require</span> <span class="pl-s"><span class="pl-pds">'</span>ember/cli/deploy/rack<span class="pl-pds">'</span></span>
 
-engine <span class="pl-k">=</span> <span class="pl-c1">Ember</span>::<span class="pl-c1">CLI</span>::<span class="pl-c1">Deploy</span>::<span class="pl-c1">Rack</span>::<span class="pl-c1">Engine</span>.<span class="pl-k">new</span>
-engine.settings.set <span class="pl-c1">:root</span>, <span class="pl-c1">Dir</span>.pwd
-
-run engine</pre></div>
+run <span class="pl-c1">Ember</span>::<span class="pl-c1">CLI</span>::<span class="pl-c1">Deploy</span>::<span class="pl-c1">Rack</span>::<span class="pl-c1">Engine</span></pre></div>
 </li>
 <li><p>Run the engine with <code>rackup</code> or your favorite Ruby Webserver</p></li>
 </ol>
@@ -98,7 +95,10 @@ run engine</pre></div>
 <p>Via settings</p>
 
 <div class="highlight highlight-source-ruby"><pre>engine <span class="pl-k">=</span> <span class="pl-c1">Ember</span>::<span class="pl-c1">CLI</span>::<span class="pl-c1">Deploy</span>::<span class="pl-c1">Rack</span>::<span class="pl-c1">Engine</span>.<span class="pl-k">new</span>
-engine.settings.set <span class="pl-c1">:root</span>, <span class="pl-c1">Dir</span>.pwd
+
+<span class="pl-c"># === Settings ====</span>
+
+<span class="pl-c"># engine.settings.set :root, Dir.pwd</span>
 <span class="pl-c"># engine.settings.set :key_prefix, 'ember-cli-deploy-rack:index'</span>
 <span class="pl-c"># engine.settings.set :active_content_suffix, 'current-content'</span>
 <span class="pl-c"># engine.settings.set :revision, { regexp: '^[0-9a-f]{32}$' }</span>
@@ -107,6 +107,19 @@ engine.settings.set <span class="pl-c1">:root</span>, <span class="pl-c1">Dir</s
 <span class="pl-c"># engine.settings.set :debug, false</span>
 <span class="pl-c"># ...</span>
 
+<span class="pl-c"># === Logging ====</span>
+
+<span class="pl-c"># log_dir = File.expand_path 'log'</span>
+<span class="pl-c">#</span>
+<span class="pl-c"># if File.directory? log_dir</span>
+<span class="pl-c">#   log_file = File.expand_path "#{engine.settings.environment}.log", log_dir</span>
+<span class="pl-c">#</span>
+<span class="pl-c">#   logger = Logger.new log_file, File::WRONLY | File::APPEND | File::CREAT</span>
+<span class="pl-c">#   logger.level = Logger::ERROR</span>
+<span class="pl-c">#</span>
+<span class="pl-c">#   engine.settings.set :logger, logger</span>
+<span class="pl-c"># end</span>
+
 run engine</pre></div>
 </li>
 <li>
@@ -114,8 +127,6 @@ run engine</pre></div>
 
 <p>Just create a configuration file <code>config/settings.yml</code> and adjust properly, for an example see
 <a href="https://github.com/bitaculous/ember-cli-deploy-rack/blob/master/resources/config/settings.yml" title="Sample YAML configuration">resources/config/settings.yml</a>.</p>
-
-<p><strong>Note: You must set the <code>root</code> setting, so that the configuration can be found.</strong></p>
 </li>
 </ol>
 
