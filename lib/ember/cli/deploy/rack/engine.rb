@@ -11,25 +11,21 @@ module Ember
       module Rack # :nodoc:
         # = Engine
         #
-        # The engine class of `Ember::CLI::Deploy::Rack`, inherited from `Sinatra::Application`.
-        class Engine < Sinatra::Application
+        # The engine class of `Ember::CLI::Deploy::Rack`, inherited from `Sinatra::Base`.
+        class Engine < Sinatra::Base
           # === Constants ===
 
-          ROOT                  = File.expand_path '../../../../../../', __FILE__
-          VIEWS                 = File.expand_path 'views', ROOT
+          TRAIL                 = File.expand_path '../../../../../../', __FILE__
+          VIEWS                 = File.expand_path 'views', TRAIL
           CONFIG                = 'config/settings.yml'
 
           KEY_PREFIX            = 'ember-cli-deploy-rack:index'
           ACTIVE_CONTENT_SUFFIX = 'current-content'
           REVISION_REGEXP       = '^[0-9a-f]{32}$'
 
-          # === Extensions ===
-
-          register Sinatra::ConfigFile
-
           # === Settings ===
 
-          set :root, ROOT
+          set :root, TRAIL
 
           set :views, VIEWS
 
@@ -60,6 +56,8 @@ module Ember
 
           # === Extensions ===
 
+          register Sinatra::ConfigFile
+
           config_file File.expand_path CONFIG
 
           # === Helpers ===
@@ -67,15 +65,6 @@ module Ember
           helpers Sinatra::CustomLogger
 
           # === Configuration ===
-
-          configure do
-            logfile = File.open "#{settings.root}/log/#{environment}.log", 'a'
-            logger  = Logger.new logfile
-
-            logger.level = Logger::DEBUG if development?
-
-            set :logger, logger
-          end
 
           configure :development do
             register Sinatra::Reloader
@@ -93,8 +82,9 @@ module Ember
 
           get '/debug' do
             if settings.debug
-              @id    = 'debug'
-              @title = 'Debug'
+              @id       = 'debug'
+              @title    = 'Debug'
+              @settings = settings
 
               haml :debug
             else
