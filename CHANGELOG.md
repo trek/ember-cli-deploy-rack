@@ -1,6 +1,7 @@
 2.2.0
 =====
 
+* [➠] First release on RubyGems
 * [➠] Debug information can be enabled / disabled
 * [➠] Formatted debug information
 
