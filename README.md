@@ -37,7 +37,7 @@ Installation
 
     source 'https://rubygems.org'
 
-    gem 'ember-cli-deploy-rack', github: 'bitaculous/ember-cli-deploy-rack', require: false
+    gem 'ember-cli-deploy-rack', require: false
     ```
 
 2. Run `bundle` to install all dependencies with [Bundler]
