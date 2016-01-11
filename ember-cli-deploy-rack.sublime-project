@@ -6,6 +6,7 @@
       "folder_exclude_patterns": [
         ".bundle",
         "coverage",
+        "log",
         "pkg",
         "tmp"
       ],
