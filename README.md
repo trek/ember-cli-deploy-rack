@@ -5,6 +5,7 @@
 [![Code Climate Status][Code Climate Status]][Code Climate]
 [![Test Coverage Status][Test Coverage Status]][Test Coverage]
 [![Gemnasium Status][Gemnasium Status]][Gemnasium]
+[![Gem Version][Gem Version]][RubyGems]
 
 **A [Rack] package to launch your [Ember.js] application into the Cloud.**
 
@@ -198,6 +199,7 @@ Ember CLI Deploy Rack is released under the [MIT License (MIT)], see [LICENSE].
 [ember-deploy-redis]: https://github.com/ember-cli-deploy/ember-cli-deploy-redis "An ember-cli-deploy plugin to upload index.html to a Redis store."
 [Ember.js]: http://emberjs.com "A framework for creating ambitious web applications."
 [Foreman]: http://ddollar.github.io/foreman "Manage Procfile-based applications"
+[Gem Version]: https://img.shields.io/gem/v/ember-cli-deploy-rack.svg?style=flat "Gem Version"
 [Gemnasium]: https://gemnasium.com/bitaculous/ember-cli-deploy-rack "Ember CLI Deploy Rack at Gemnasium"
 [Gemnasium Status]: https://img.shields.io/gemnasium/bitaculous/ember-cli-deploy-rack.svg?style=flat "Gemnasium Status"
 [Guard]: http://guardgem.org "A command line tool to easily handle events on file system modifications."
@@ -211,6 +213,7 @@ Ember CLI Deploy Rack is released under the [MIT License (MIT)], see [LICENSE].
 [RSpec]: http://rspec.info "Behaviour Driven Development for Ruby"
 [RuboCop]: https://github.com/bbatsov/rubocop "A Ruby static code analyzer, based on the community Ruby style guide."
 [Ruby]: https://www.ruby-lang.org "A dynamic, open source programming language with a focus on simplicity and productivity."
+[RubyGems]: https://rubygems.org/gems/ember-cli-deploy-rack "Ember CLI Deploy Rack at RubyGems"
 [Semantic Versioning 2.0.0]: http://semver.org "Semantic Versioning 2.0.0"
 [Sinatra]: http://www.sinatrarb.com "A DSL for quickly creating web applications in Ruby with minimal effort."
 [Test Coverage]: https://codeclimate.com/github/bitaculous/ember-cli-deploy-rack "Test Coverage (Code Climate)"
