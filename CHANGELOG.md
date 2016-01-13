@@ -1,3 +1,9 @@
+2.3.1
+=====
+
+[➠] Moved tasks out of library
+[➠] Updated Gems
+
 2.3.0
 =====
 
