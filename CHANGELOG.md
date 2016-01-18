@@ -1,8 +1,13 @@
+2.3.2
+=====
+
+* [➠] Freeze mutable objects assigned to constants
+
 2.3.1
 =====
 
-[➠] Moved tasks out of library
-[➠] Updated Gems
+* [➠] Moved Rake tasks out of library
+* [➠] Updated Gems
 
 2.3.0
 =====
