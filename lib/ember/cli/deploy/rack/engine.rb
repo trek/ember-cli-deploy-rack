@@ -15,13 +15,12 @@ module Ember
         class Engine < Sinatra::Base
           # === Constants ===
 
-          TRAIL                 = File.expand_path '../../../../../../', __FILE__
-          VIEWS                 = File.expand_path 'views', TRAIL
-          CONFIG                = 'config/settings.yml'
-
-          KEY_PREFIX            = 'ember-cli-deploy-rack:index'
-          ACTIVE_CONTENT_SUFFIX = 'current-content'
-          REVISION_REGEXP       = '^[0-9a-f]{32}$'
+          TRAIL                 = File.expand_path('../../../../../../', __FILE__).freeze
+          VIEWS                 = File.expand_path('views', TRAIL).freeze
+          CONFIG                = 'config/settings.yml'.freeze
+          KEY_PREFIX            = 'ember-cli-deploy-rack:index'.freeze
+          ACTIVE_CONTENT_SUFFIX = 'current-content'.freeze
+          REVISION_REGEXP       = '^[0-9a-f]{32}$'.freeze
 
           # === Settings ===
 
