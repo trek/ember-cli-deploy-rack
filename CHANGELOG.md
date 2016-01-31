@@ -1,3 +1,9 @@
+2.4.0
+=====
+
+* [➠] Updated RuboCop configuration
+* [➠] Updated Sinatra
+
 2.3.2
 =====
 
