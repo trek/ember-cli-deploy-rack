@@ -9,9 +9,7 @@ module Ember
   module CLI
     module Deploy
       module Rack # :nodoc:
-        # = Engine
-        #
-        # The engine class of `Ember::CLI::Deploy::Rack`, inherited from `Sinatra::Base`.
+        # The Engine class of `Ember::CLI::Deploy::Rack`, inherited from `Sinatra::Base`.
         class Engine < Sinatra::Base
           # === Constants ===
 
