@@ -11,6 +11,7 @@ STEPS:
 2. Bump version in `lib/ember/cli/deploy/rack/version.rb`
 3. Push changes
 4. Create a tag
+5. Push Gem to [RubyGems.org]
 
 Glossary
 --------
@@ -18,3 +19,4 @@ Glossary
 ¹ [Ember CLI RELEASE]
 
 [Ember CLI RELEASE]: https://raw.githubusercontent.com/ember-cli/ember-cli/master/RELEASE.md "Ember CLI RELEASE"
+[RubyGems.org]: https://rubygems.org "Your community Gem host"
