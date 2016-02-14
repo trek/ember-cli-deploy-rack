@@ -9,8 +9,8 @@ STEPS:
 
 1. Update CHANGELOG
 2. Bump version in `lib/ember/cli/deploy/rack/version.rb`
-5. Push changes
-6. Create a tag
+3. Push changes
+4. Create a tag
 
 Glossary
 --------
