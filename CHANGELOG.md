@@ -1,5 +1,5 @@
-Unreleased
-==========
+2.4.2
+=====
 
 * [➠] Added metadata to Gemspec
 

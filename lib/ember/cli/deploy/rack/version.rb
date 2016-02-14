@@ -4,7 +4,7 @@ module Ember
   module CLI
     module Deploy
       module Rack # :nodoc:
-        VERSION = '2.4.1'.freeze
+        VERSION = '2.4.2'.freeze
       end
     end
   end
