@@ -1,3 +1,8 @@
+Unreleased
+==========
+
+* [➠] Added metadata to Gemspec
+
 2.4.1
 =====
 
