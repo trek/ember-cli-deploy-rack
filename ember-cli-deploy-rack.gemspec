@@ -11,8 +11,8 @@ Gem::Specification.new 'ember-cli-deploy-rack', Ember::CLI::Deploy::Rack::VERSIO
   spec.files            = Dir['{lib,resources,spec}/**/*', 'CHANGELOG.md', 'CONTRIBUTING.md', 'LICENSE', 'README.md']
   spec.extra_rdoc_files = ['CHANGELOG.md', 'CONTRIBUTING.md', 'LICENSE', 'README.md']
   spec.metadata         = {
-    source_code:   'https://github.com/bitaculous/ember-cli-deploy-rack',
-    issue_tracker: 'https://github.com/bitaculous/ember-cli-deploy-rack/issues'
+    'source_code'   => 'https://github.com/bitaculous/ember-cli-deploy-rack',
+    'issue_tracker' => 'https://github.com/bitaculous/ember-cli-deploy-rack/issues'
   }
 
   spec.required_ruby_version     = '~> 2.2'
