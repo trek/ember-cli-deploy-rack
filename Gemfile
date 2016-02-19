@@ -29,7 +29,7 @@ group :test do
   # --- Code Analysis ---
 
   gem 'rubocop',       '~> 0.37.2', require: false
-  gem 'rubocop-rspec', github: 'nevir/rubocop-rspec', require: false
+  gem 'rubocop-rspec', '~> 1.4.0',  require: false
 
   # --- Coverage ---
 
