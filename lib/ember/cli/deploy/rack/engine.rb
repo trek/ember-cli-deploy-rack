@@ -109,11 +109,7 @@ module Ember
             if revision
               regexp = Regexp.new settings.revision['regexp'], 1
 
-              if revision =~ regexp
-                key = "#{settings.key_prefix}:#{revision}"
-              else
-                halt 400
-              end
+              key = "#{settings.key_prefix}:#{revision}" if revision =~ regexp
             end
 
             key
