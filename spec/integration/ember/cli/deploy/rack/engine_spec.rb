@@ -2,16 +2,16 @@ RSpec.describe Ember::CLI::Deploy::Rack::Engine do
   let(:key_prefix) { app.settings.key_prefix }
   let(:redis)      { app.settings.redis_client }
 
-  it 'response with 404 when revision is not valid' do
+  it 'response with 400 when revision is not valid' do
     revision = 'invalid-revision'
 
     get '/', revision: revision
 
-    expect(last_response.status).to eq 404
+    expect(last_response.status).to eq 400
   end
 
   context 'data available' do
-    describe '/' do
+    describe '/*' do
       it 'returns the `current-content` revision as default' do
         revision = 'current-content'
         fixture  = File.expand_path "ember/cli/deploy/rack/engine/revisions/#{revision}.html", fixtures
@@ -20,6 +20,11 @@ RSpec.describe Ember::CLI::Deploy::Rack::Engine do
         redis.set "#{key_prefix}:#{revision}", html
 
         get '/'
+
+        expect(last_response).to be_ok
+        expect(last_response.body).to eq html
+
+        get '/foo/bar'
 
         expect(last_response).to be_ok
         expect(last_response.body).to eq html
@@ -33,6 +38,11 @@ RSpec.describe Ember::CLI::Deploy::Rack::Engine do
         redis.set "#{key_prefix}:#{revision}", html
 
         get '/', revision: revision
+
+        expect(last_response).to be_ok
+        expect(last_response.body).to eq html
+
+        get '/foo/bar', revision: revision
 
         expect(last_response).to be_ok
         expect(last_response.body).to eq html

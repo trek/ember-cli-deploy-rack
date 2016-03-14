@@ -69,14 +69,6 @@ module Ember
 
           # === Routes ===
 
-          get '/' do
-            content_type 'text/html'
-
-            logger.debug 'Processing request for `/` route...'
-
-            index params[:revision]
-          end
-
           get '/debug' do
             if settings.debug
               @id       = 'debug'
@@ -87,6 +79,14 @@ module Ember
             else
               halt 403
             end
+          end
+
+          get '/*' do
+            content_type 'text/html'
+
+            logger.debug 'Processing request for `/*` route...'
+
+            index params[:revision]
           end
 
           # === Private ===
@@ -109,7 +109,11 @@ module Ember
             if revision
               regexp = Regexp.new settings.revision['regexp'], 1
 
-              key = "#{settings.key_prefix}:#{revision}" if revision =~ regexp
+              if revision =~ regexp
+                key = "#{settings.key_prefix}:#{revision}"
+              else
+                halt 400
+              end
             end
 
             key
