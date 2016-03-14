@@ -1,3 +1,14 @@
+2.5.0
+=====
+
+* [✓] Catch all routes, fixes #1
+* [➠] Updated Gems
+
+2.4.4
+=====
+
+* [➠] Updated Gems
+
 2.4.3
 =====
 
