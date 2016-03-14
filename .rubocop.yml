@@ -2,7 +2,9 @@
 
 # === Custom Cops ===
 
-require: rubocop-rspec
+AllCops:
+  Include:
+    - rubocop-rspec
 
 # === Configuration ===
 

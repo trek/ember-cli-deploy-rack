@@ -23,6 +23,6 @@ Gem::Specification.new 'ember-cli-deploy-rack', Ember::CLI::Deploy::Rack::VERSIO
   spec.add_runtime_dependency 'haml',            '~> 4.0', '>= 4.0.7'
   spec.add_runtime_dependency 'redis',           '~> 3.2', '>= 3.2.2'
 
-  spec.add_development_dependency 'rake',  '~> 10.5', '>= 10.5.0'
+  spec.add_development_dependency 'rake',  '~> 11.1', '>= 11.1.1'
   spec.add_development_dependency 'rspec', '~> 3.4',  '>= 3.4.0'
 end
