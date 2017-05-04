@@ -8,7 +8,7 @@ Gem::Specification.new 'ember-cli-deploy-rack', Ember::CLI::Deploy::Rack::VERSIO
   spec.email            = 'mkempe@bitaculous.com'
   spec.homepage         = 'https://bitaculous.github.io/ember-cli-deploy-rack/'
   spec.license          = 'MIT'
-  spec.files            = Dir['{lib,resources,spec}/**/*', 'CHANGELOG.md', 'CONTRIBUTING.md', 'LICENSE', 'README.md']
+  spec.files            = Dir['{lib,resources,spec,views}/**/*', 'CHANGELOG.md', 'CONTRIBUTING.md', 'LICENSE', 'README.md']
   spec.extra_rdoc_files = ['CHANGELOG.md', 'CONTRIBUTING.md', 'LICENSE', 'README.md']
   spec.metadata         = {
     'source_code'   => 'https://github.com/bitaculous/ember-cli-deploy-rack',
